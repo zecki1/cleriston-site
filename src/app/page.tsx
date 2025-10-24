@@ -1,3 +1,4 @@
+
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -9,7 +10,6 @@ import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/layout/Footer";
 
-// --- LÓGICA DO FIREBASE ---
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -18,11 +18,11 @@ const firebaseConfig = {
     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 
 async function getSiteData(clienteId: string) {
-    // A verificação agora acontece antes de chamar esta função
     try {
         const docRef = doc(db, "clientes", clienteId);
         const docSnap = await getDoc(docRef);
@@ -33,19 +33,17 @@ async function getSiteData(clienteId: string) {
     }
 }
 
-// --- O COMPONENTE DA PÁGINA ---
 export default async function ModernHomePage() {
-    // CORREÇÃO: Acessar a variável de ambiente de forma segura
     const CLIENT_ID = process.env.CLIENT_ID;
 
-    // Verificação de segurança: Se CLIENT_ID não estiver no .env.local, mostre um erro claro.
-    if (!CLIENT_ID || CLIENT_ID === "UID_DO_CLERISTON_NO_SEU_FIREBASE") {
+    if (!CLIENT_ID) {
         return (
             <main className="flex h-screen items-center justify-center">
-                <div className="text-center p-4 bg-red-100 border border-red-400 rounded-lg">
-                    <h1 className="text-2xl font-bold text-red-800">Erro de Configuração</h1>
-                    <p className="text-red-600 mt-2">A variável de ambiente `CLIENT_ID` não está definida no arquivo `.env.local`.</p>
-                    <p className="text-red-600 mt-1">Por favor, defina o ID do cliente corretamente e reinicie o servidor.</p>
+                <div className="text-center p-6 bg-destructive/10 border border-destructive rounded-lg">
+                    <h1 className="text-2xl font-bold text-destructive">Erro de Configuração</h1>
+                    {/* CORREÇÃO: Usando &apos; no lugar de ' */}
+                    <p className="text-destructive/80 mt-2">A variável de ambiente &apos;CLIENT_ID&apos; não está configurada no servidor.</p>
+                    <p className="text-destructive/80 mt-1">Por favor, adicione a variável no painel da Vercel e faça o redeploy.</p>
                 </div>
             </main>
         );
@@ -56,10 +54,11 @@ export default async function ModernHomePage() {
     if (!data) {
         return (
             <main className="flex h-screen items-center justify-center">
-                <div className="text-center p-4 bg-yellow-100 border border-yellow-400 rounded-lg">
-                    <h1 className="text-2xl font-bold text-yellow-800">Dados não encontrados.</h1>
-                    <p className="text-yellow-600 mt-2">Verifique se o CLIENT_ID (`{CLIENT_ID}`) está correto e se os dados existem no Firestore.</p>
-                    <p className="text-yellow-600 mt-1">Você já rodou `npm run seed`?</p>
+                <div className="text-center p-6 bg-yellow-400/10 border border-yellow-500 rounded-lg">
+                    <h1 className="text-2xl font-bold text-yellow-800 dark:text-yellow-300">Dados não Encontrados</h1>
+                    <p className="text-yellow-700 dark:text-yellow-400 mt-2">Verifique se o CLIENT_ID (`{CLIENT_ID}`) está correto e se os dados existem no Firestore.</p>
+                    {/* CORREÇÃO: Usando &apos; no lugar de ' */}
+                    <p className="text-yellow-700 dark:text-yellow-400 mt-1">Pode ser necessário rodar o script &apos;npm run seed&apos; no projeto do painel.</p>
                 </div>
             </main>
         );
@@ -69,14 +68,13 @@ export default async function ModernHomePage() {
         <div className="flex flex-col min-h-screen">
             <FloatingHeader />
             <SideNav />
-            <MobileNav /> 
+            <MobileNav />
             <main className="flex-grow">
                 <HeroSection hero={data.hero} social={data.social} />
                 <AboutSection data={data.sobre} />
                 <PortfolioSection data={data.portfolio} />
                 <ContactSection data={data.contato} />
             </main>
-
             <Footer social={data.social} />
         </div>
     );
