@@ -1,42 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 
-// URL do seu painel administrativo. Coloque em variáveis de ambiente para produção.
-const ALLOWED_ORIGIN = process.env.NODE_ENV === 'production' 
-    ? process.env.NEXT_PUBLIC_ADMIN_URL!
-    : 'http://localhost:3000';
+// Lista de origens permitidas
+const allowedOrigins = [
+    process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_ADMIN_URL : 'http://localhost:3000',
+    'https://zecki-site.vercel.app', 'zecki1.com.br/',
+];
+
+const corsHeaders = (origin: string | null) => {
+    const headers = new Headers();
+    if (origin && allowedOrigins.includes(origin)) {
+        headers.set('Access-Control-Allow-Origin', origin);
+    }
+    headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return headers;
+};
 
 export async function GET(request: NextRequest) {
-  const secret = request.nextUrl.searchParams.get('secret');
+    const origin = request.headers.get('origin');
+    const headers = corsHeaders(origin);
 
-  // Headers de CORS
-  const headers = {
-    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  };
+    const secret = request.nextUrl.searchParams.get('secret');
 
-  if (secret !== process.env.REVALIDATE_TOKEN) {
-    return new NextResponse(JSON.stringify({ message: 'Invalid Token' }), {
-      status: 401,
-      headers: { ...headers, 'Content-Type': 'application/json' },
-    });
-  }
+    if (secret !== process.env.REVALIDATE_TOKEN) {
+        return new NextResponse(JSON.stringify({ message: 'Invalid Token' }), { status: 401, headers });
+    }
 
-  revalidatePath('/');
-  
-  return NextResponse.json({ revalidated: true, now: Date.now() }, {
-    status: 200,
-    headers: headers,
-  });
+    revalidatePath('/');
+
+    return NextResponse.json({ revalidated: true, now: Date.now() }, { status: 200, headers });
 }
 
-// Rota OPTIONS para a "pergunta" de pre-flight do navegador
 export async function OPTIONS(request: NextRequest) {
-  const headers = {
-    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  };
-  return new NextResponse(null, { status: 204, headers });
+    const origin = request.headers.get('origin');
+    const headers = corsHeaders(origin);
+    return new NextResponse(null, { status: 204, headers });
 }
