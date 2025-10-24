@@ -1,0 +1,196 @@
+.
+|-- .env.local
+|-- .firebaserc
+|-- .gitignore
+|-- README.md
+|-- components.json
+|-- eslint.config.mjs
+|-- firebase.json
+|-- next-env.d.ts
+|-- next.config.ts
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.mjs
+|-- project_structure.txt
+|-- public
+|   |-- 404.html
+|   |-- assets
+|   |   `-- img
+|   |       |-- hero-bg.jpg
+|   |       |-- perfil.jpg
+|   |       `-- portfolio
+|   |           |-- 021_01_i_u4_cknB_booklet_m-01.jpg
+|   |           |-- 021_02_i_u4_cknB_booklet_m-01.jpg
+|   |           |-- 024_01_i_u4_cknB_booklet_m_Prancheta 1.jpg
+|   |           |-- CIE_2_ANO_UND_4_PL4_I004-01.jpg
+|   |           |-- SPE_REG_NV21_MS_EF5_GEO_LA-I007.jpg
+|   |           |-- SPE_REG_NV22_RR_EF3_HIS_AL-I007_Prancheta 1.jpg
+|   |           |-- cleriston ribeiro_supermarket editorial illustration_Prancheta 1.jpg
+|   |           |-- cleriston.ribeiro_characterdesign-dog.jpg
+|   |           |-- cleriston.ribeiro_characterdesign.jpg
+|   |           |-- cleriston.ribeiro_childrensapp.jpg
+|   |           |-- cleriston.ribeiro_childrensbook.jpg
+|   |           |-- cleriston.ribeiro_childrensbook2.jpg
+|   |           |-- cleriston.ribeiro_childrensbook3.jpg
+|   |           |-- cleriston.ribeiro_childrensbook4.jpg
+|   |           |-- cleriston.ribeiro_childrensbook5.jpg
+|   |           |-- cleriston.ribeiro_comicsart-characterdesign.jpg
+|   |           |-- cleriston.ribeiro_comicsart-characterdesign2.jpg
+|   |           |-- cleriston.ribeiro_comicsart.jpg
+|   |           |-- cleriston.ribeiro_copolorido packaging illustration.jpg
+|   |           |-- cleriston.ribeiro_coursebook-cangaceiro.jpg
+|   |           |-- cleriston.ribeiro_coursebook-city.jpg
+|   |           |-- cleriston.ribeiro_coursebook-family.jpg
+|   |           |-- cleriston.ribeiro_coursebook-hero.jpg
+|   |           |-- cleriston.ribeiro_coursebook-lizard.jpg
+|   |           |-- cleriston.ribeiro_coursebook-martian_farm.jpg
+|   |           |-- cleriston.ribeiro_coursebook-painter.jpg
+|   |           |-- cleriston.ribeiro_coursebook-peoples.jpg
+|   |           |-- cleriston.ribeiro_coursebook-tailor.jpg
+|   |           |-- cleriston.ribeiro_coursebook-thegoalkeeper.jpg
+|   |           |-- cleriston.ribeiro_coursebook2.jpg
+|   |           |-- cleriston.ribeiro_coursebook3.jpg
+|   |           |-- cleriston.ribeiro_illustration-boardgamechristmas.jpg
+|   |           |-- cleriston.ribeiro_packaging-illustration.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-boy.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-braziliansoccer.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-braziliansoccer2.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-braziliansoccer3.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-gamer.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-girl.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-mamute.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration-philosophy_in_cinema.jpg
+|   |           |-- cleriston.ribeiro_publicitary-editorialillustration.jpg
+|   |           |-- cleriston.ribeiro_theclassrom textbook.jpg
+|   |           |-- humorismo_Dihh Lopes.jpg
+|   |           |-- humorismo_Diogo Portugal.jpg
+|   |           |-- humorismo_Porchat.jpg
+|   |           |-- humorismo_Ventura.jpg
+|   |           |-- humorismo_afonso padilha.jpg
+|   |           |-- humorismo_danilo.jpg
+|   |           |-- humorismo_murilo couto.jpg
+|   |           |-- humorismo_rafinha.jpg
+|   |           |-- noel-01.jpg
+|   |           |-- noel-02.jpg
+|   |           `-- noel-03.jpg
+|   `-- index.html
+|-- serviceAccountKey.json
+|-- src
+|   |-- app
+|   |   |-- favicon.ico
+|   |   |-- globals.css
+|   |   |-- layout.tsx
+|   |   `-- page.tsx
+|   |-- assets
+|   |   |-- audio
+|   |   |-- docs
+|   |   `-- img
+|   |       `-- capa.png
+|   |-- components
+|   |   |-- ClientLogic.tsx
+|   |   |-- components.tsx
+|   |   |-- gsap
+|   |   |   |-- CanvasParticles.tsx
+|   |   |   |-- GsapImageParallax.tsx
+|   |   |   |-- GsapParallax.tsx
+|   |   |   |-- NavigationScrollTrigger.tsx
+|   |   |   |-- ProjectsCarousel.tsx
+|   |   |   |-- ScrollSmootherHeader.tsx
+|   |   |   |-- ScrollSmootherThree.tsx
+|   |   |   |-- ScrollTriggerClamp.tsx
+|   |   |   |-- SmoothScrollyImages.tsx
+|   |   |   `-- StaggeredText.tsx
+|   |   |-- i18n-provider.tsx
+|   |   |-- layout
+|   |   |   |-- AccessibilityProvider.tsx
+|   |   |   |-- BentoCard.tsx
+|   |   |   |-- Container.tsx
+|   |   |   |-- Cover.tsx
+|   |   |   |-- CustomCursor.tsx
+|   |   |   |-- DynamicPageClient.tsx
+|   |   |   |-- Flags.tsx
+|   |   |   |-- FloatingHeader.tsx
+|   |   |   |-- Footer.tsx
+|   |   |   |-- Header.tsx
+|   |   |   |-- ImageContainer.tsx
+|   |   |   |-- Login.tsx
+|   |   |   |-- Parallax.tsx
+|   |   |   |-- ScrollIndicator.tsx
+|   |   |   |-- Sections.tsx
+|   |   |   |-- SideNav.tsx
+|   |   |   |-- Sidebar.tsx
+|   |   |   |-- SkillsMarquee.tsx
+|   |   |   |-- TextTranslator.tsx
+|   |   |   |-- ThemeProvider.tsx
+|   |   |   |-- Topic.tsx
+|   |   |   `-- YouTubeBackground.tsx
+|   |   |-- sections
+|   |   |   |-- AboutSection.tsx
+|   |   |   |-- ContactSection.tsx
+|   |   |   |-- HeroSection.tsx
+|   |   |   |-- PortfolioSection.tsx
+|   |   |   `-- SectionWrapper.tsx
+|   |   |-- theme-provider.tsx
+|   |   `-- ui
+|   |       |-- accordion.tsx
+|   |       |-- alert-dialog.tsx
+|   |       |-- alert.tsx
+|   |       |-- aspect-ratio.tsx
+|   |       |-- avatar.tsx
+|   |       |-- badge.tsx
+|   |       |-- breadcrumb.tsx
+|   |       |-- button.tsx
+|   |       |-- calendar.tsx
+|   |       |-- card.tsx
+|   |       |-- carousel.tsx
+|   |       |-- chart.tsx
+|   |       |-- checkbox.tsx
+|   |       |-- collapsible.tsx
+|   |       |-- command.tsx
+|   |       |-- context-menu.tsx
+|   |       |-- dialog.tsx
+|   |       |-- drawer.tsx
+|   |       |-- dropdown-menu.tsx
+|   |       |-- form.tsx
+|   |       |-- hover-card.tsx
+|   |       |-- input-otp.tsx
+|   |       |-- input.tsx
+|   |       |-- label.tsx
+|   |       |-- menubar.tsx
+|   |       |-- navigation-menu.tsx
+|   |       |-- pagination.tsx
+|   |       |-- popover.tsx
+|   |       |-- progress.tsx
+|   |       |-- radio-group.tsx
+|   |       |-- resizable.tsx
+|   |       |-- scroll-area.tsx
+|   |       |-- select.tsx
+|   |       |-- separator.tsx
+|   |       |-- sheet.tsx
+|   |       |-- sidebar.tsx
+|   |       |-- skeleton.tsx
+|   |       |-- slider.tsx
+|   |       |-- sonner.tsx
+|   |       |-- switch.tsx
+|   |       |-- table.tsx
+|   |       |-- tabs.tsx
+|   |       |-- textarea.tsx
+|   |       |-- toggle-group.tsx
+|   |       |-- toggle.tsx
+|   |       `-- tooltip.tsx
+|   |-- lib
+|   |   |-- firebase.ts
+|   |   |-- hooks
+|   |   |   `-- use-mobile.ts
+|   |   |-- i18n.ts
+|   |   |-- navSections.ts
+|   |   |-- parallaxImages.ts
+|   |   `-- utils.ts
+|   |-- scripts
+|   |   `-- seedDatabase.ts
+|   `-- types
+|       `-- three.d.ts
+|-- tailwind.config.ts
+`-- tsconfig.json
+
+19 directories, 174 files
