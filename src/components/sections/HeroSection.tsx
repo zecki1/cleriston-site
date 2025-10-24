@@ -8,8 +8,10 @@ import { useTranslation } from "react-i18next";
 import { Instagram, Linkedin, MessageSquare } from 'lucide-react';
 import { FaBehanceSquare } from "react-icons/fa";
 
-type TypedItemsMultiLang = { ptBR: string[]; en: string[]; es: string[];[key: string]: string[]; };
-type HeroData = { title: string; typedItems: TypedItemsMultiLang; backgroundImage?: string };
+type MultiLangArray = { ptBR: string[]; en: string[]; es: string[];[key: string]: string[]; };
+type MultiLangText = { ptBR: string; en: string; es: string;[key: string]: string; };
+
+type HeroData = { title: string; typedItems: MultiLangArray; backgroundImage?: string };
 type SocialData = { instagram: string; whatsapp: string; behance: string; linkedin: string; };
 
 export function HeroSection({ hero, social }: { hero: HeroData, social: SocialData }) {
@@ -17,11 +19,12 @@ export function HeroSection({ hero, social }: { hero: HeroData, social: SocialDa
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
 
-  const currentLanguage = isMounted ? i18n.language : 'ptBR';
+  const currentLanguage = isMounted ? (i18n.language as keyof MultiLangText) : 'ptBR';
   const itemsToDisplay = hero.typedItems[currentLanguage] || hero.typedItems.ptBR;
   const bgImage = hero.backgroundImage || "/assets/img/hero-bg.jpg";
 
-  const heroTexts = {
+  // CORREÇÃO: Definindo a tipagem para o objeto de textos
+  const heroTexts: { iAm: MultiLangText } = {
     iAm: { ptBR: 'Eu sou', en: 'I am', es: 'Yo soy' }
   }
 

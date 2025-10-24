@@ -12,9 +12,20 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Autoplay from "embla-carousel-autoplay";
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-type MultiLangText = { ptBR: string; en?: string; es?: string;[key: string]: string | undefined; };
+type MultiLangText = { ptBR: string; en: string; es: string;[key: string]: string; };
 type PortfolioItem = { id: string; titulo: MultiLangText; descricao: MultiLangText; categoria: string; imagemUrl: string; };
 type PortfolioData = { titulo: MultiLangText; subtitulo: MultiLangText; items: PortfolioItem[]; };
+
+type LanguageKey = 'ptBR' | 'en' | 'es';
+
+type CategoryTranslations = {
+    all: MultiLangText;
+    characterDesign: MultiLangText;
+    caricatura: MultiLangText;
+    publi: MultiLangText;
+    editorial: MultiLangText;
+    [key: string]: MultiLangText;
+};
 
 export function PortfolioSection({ data }: { data: PortfolioData }) {
     const { i18n } = useTranslation();
@@ -34,7 +45,7 @@ export function PortfolioSection({ data }: { data: PortfolioData }) {
         });
     }, [api]);
 
-    const currentLanguage = isMounted ? (i18n.language as keyof MultiLangText) : 'ptBR';
+    const currentLanguage: LanguageKey = isMounted ? (i18n.language as LanguageKey) : 'ptBR';
     const titulo = data.titulo[currentLanguage] || data.titulo.ptBR;
     const subtitulo = data.subtitulo[currentLanguage] || data.subtitulo.ptBR;
 
@@ -42,11 +53,20 @@ export function PortfolioSection({ data }: { data: PortfolioData }) {
     const categories = ['*', ...Array.from(new Set(data.items.map(item => item.categoria)))];
     const filteredItems = filter === '*' ? data.items : data.items.filter(item => item.categoria === filter);
 
-    const categoryTranslations = { all: { ptBR: 'Todos', en: 'All', es: 'Todos' }, characterDesign: { ptBR: 'Character Design', en: 'Character Design', es: 'Diseño de Personajes' }, caricatura: { ptBR: 'Caricaturas', en: 'Caricatures', es: 'Caricaturas' }, publi: { ptBR: 'Publicidade', en: 'Advertising', es: 'Publicidad' }, editorial: { ptBR: 'Editorial', en: 'Editorial', es: 'Editorial' }, };
-    const getCategoryTranslation = (category: string) => {
-        const key = category.replace('-', '') as keyof typeof categoryTranslations;
-        const langKey = currentLanguage as keyof typeof categoryTranslations.all;
-        return categoryTranslations[key]?.[langKey] || category;
+    const categoryTranslations: CategoryTranslations = {
+        all: { ptBR: 'Todos', en: 'All', es: 'Todos' },
+        characterDesign: { ptBR: 'Character Design', en: 'Character Design', es: 'Diseño de Personajes' },
+        caricatura: { ptBR: 'Caricaturas', en: 'Caricatures', es: 'Caricaturas' },
+        publi: { ptBR: 'Publicidade', en: 'Advertising', es: 'Publicidad' },
+        editorial: { ptBR: 'Editorial', en: 'Editorial', es: 'Editorial' },
+    };
+
+    const getCategoryTranslation = (category: string): string => {
+        const key = category.replace('-', '');
+        if (categoryTranslations[key]) {
+            return categoryTranslations[key][currentLanguage] || categoryTranslations[key].ptBR;
+        }
+        return category;
     };
 
     const handleCardClick = (index: number) => {
@@ -57,7 +77,11 @@ export function PortfolioSection({ data }: { data: PortfolioData }) {
     return (
         <SectionWrapper id="portfolio" title={titulo} subtitle={subtitulo}>
             <div className="mb-8 flex flex-wrap justify-center gap-2">
-                {categories.map(cat => (<Button key={cat} variant={filter === cat ? "default" : "outline"} onClick={() => setFilter(cat)} className="capitalize"> {cat === '*' ? (categoryTranslations.all[currentLanguage] || categoryTranslations.all.ptBR) : getCategoryTranslation(cat)} </Button>))}
+                {categories.map(cat => (
+                    <Button key={cat} variant={filter === cat ? "default" : "outline"} onClick={() => setFilter(cat)} className="capitalize">
+                        {cat === '*' ? categoryTranslations.all[currentLanguage] : getCategoryTranslation(cat)}
+                    </Button>
+                ))}
             </div>
             <Dialog open={open} onOpenChange={setOpen}>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

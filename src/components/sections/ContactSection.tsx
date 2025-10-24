@@ -15,6 +15,22 @@ import { toast } from "sonner";
 type MultiLangText = { ptBR: string; en: string; es: string;[key: string]: string; };
 type ContactData = { titulo: MultiLangText; localizacao: string; email: string; telefone: string; };
 
+type FormTexts = {
+    location: MultiLangText;
+    email: MultiLangText;
+    phone: MultiLangText;
+    nameLabel: MultiLangText;
+    emailLabel: MultiLangText;
+    subjectLabel: MultiLangText;
+    messageLabel: MultiLangText;
+    buttonText: MultiLangText;
+    submittingText: MultiLangText;
+    successTitle: MultiLangText;
+    successDescription: MultiLangText;
+    errorTitle: MultiLangText;
+    errorDescription: MultiLangText;
+};
+
 export function ContactSection({ data }: { data: ContactData }) {
     const { i18n } = useTranslation();
     const form = useRef<HTMLFormElement>(null);
@@ -25,7 +41,7 @@ export function ContactSection({ data }: { data: ContactData }) {
     const currentLanguage = isMounted ? (i18n.language as keyof MultiLangText) : 'ptBR';
     const titulo = data.titulo[currentLanguage] || data.titulo.ptBR;
 
-    const formTexts = {
+    const formTexts: FormTexts = {
         location: { ptBR: 'Localização', en: 'Location', es: 'Ubicación' },
         email: { ptBR: 'Email', en: 'Email', es: 'Correo Electrónico' },
         phone: { ptBR: 'Telefone', en: 'Phone', es: 'Teléfono' },
@@ -68,20 +84,10 @@ export function ContactSection({ data }: { data: ContactData }) {
     return (
         <SectionWrapper id="contact" title={titulo}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* CORREÇÃO DO ALINHAMENTO ABAIXO */}
                 <div className="lg:col-span-1 flex flex-col justify-center space-y-6">
-                    <div className="flex items-start gap-4">
-                        <div className="bg-primary/10 text-primary p-3 rounded-full"><MapPin /></div>
-                        <div><h3 className="font-semibold text-lg">{formTexts.location[currentLanguage]}</h3><p className="text-muted-foreground">{data.localizacao}</p></div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                        <div className="bg-primary/10 text-primary p-3 rounded-full"><Mail /></div>
-                        <div><h3 className="font-semibold text-lg">{formTexts.email[currentLanguage]}</h3><a href={`mailto:${data.email}`} className="text-muted-foreground hover:text-primary">{data.email}</a></div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                        <div className="bg-primary/10 text-primary p-3 rounded-full"><Phone /></div>
-                        <div><h3 className="font-semibold text-lg">{formTexts.phone[currentLanguage]}</h3><a href={`https://wa.me/${data.telefone.replace(/\D/g, '')}`} className="text-muted-foreground hover:text-primary">{data.telefone}</a></div>
-                    </div>
+                    <div className="flex items-start gap-4"><div className="bg-primary/10 text-primary p-3 rounded-full"><MapPin /></div><div><h3 className="font-semibold text-lg">{formTexts.location[currentLanguage]}</h3><p className="text-muted-foreground">{data.localizacao}</p></div></div>
+                    <div className="flex items-start gap-4"><div className="bg-primary/10 text-primary p-3 rounded-full"><Mail /></div><div><h3 className="font-semibold text-lg">{formTexts.email[currentLanguage]}</h3><a href={`mailto:${data.email}`} className="text-muted-foreground hover:text-primary">{data.email}</a></div></div>
+                    <div className="flex items-start gap-4"><div className="bg-primary/10 text-primary p-3 rounded-full"><Phone /></div><div><h3 className="font-semibold text-lg">{formTexts.phone[currentLanguage]}</h3><a href={`https://wa.me/${data.telefone.replace(/\D/g, '')}`} className="text-muted-foreground hover:text-primary">{data.telefone}</a></div></div>
                 </div>
                 <div className="lg:col-span-2">
                     <Card><CardContent className="p-6"><form ref={form} onSubmit={sendEmail} className="space-y-4">

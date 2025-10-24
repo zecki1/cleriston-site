@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react';
 
-// Declara a variável global do VLibras de forma mais específica para o TypeScript
+// CORREÇÃO: A tipagem agora reflete que VLibras é um objeto com um método Widget
 declare global {
     interface Window {
-        VLibras: new (options: string) => void;
+        VLibras: {
+            Widget: new (options: string) => void;
+        };
     }
 }
 
@@ -39,8 +41,9 @@ export function VLibrasWidget() {
         script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
         script.async = true;
         script.onload = () => {
-            if (window.VLibras) {
-                new window.VLibras('https://vlibras.gov.br/app');
+            // CORREÇÃO: A chamada agora usa 'new window.VLibras.Widget'
+            if (window.VLibras && window.VLibras.Widget) {
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
             }
         };
 
