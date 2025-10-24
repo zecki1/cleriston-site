@@ -1,11 +1,11 @@
 "use client";
 
-import Script from 'next/script';
 import { useEffect } from 'react';
 
+// Declara a variável global do VLibras de forma mais específica para o TypeScript
 declare global {
     interface Window {
-        VLibras: any;
+        VLibras: new (options: string) => void;
     }
 }
 
@@ -16,8 +16,9 @@ export function VLibrasWidget() {
         }
 
         const vwDiv = document.createElement('div');
-        vwDiv.setAttribute('vw', ''); 
+        vwDiv.setAttribute('vw', '');
         vwDiv.classList.add('enabled');
+
         const vwAccessButtonDiv = document.createElement('div');
         vwAccessButtonDiv.setAttribute('vw-access-button', '');
         vwAccessButtonDiv.classList.add('active');
@@ -31,7 +32,6 @@ export function VLibrasWidget() {
         vwPluginWrapperDiv.appendChild(vwPluginTopWrapperDiv);
         vwDiv.appendChild(vwAccessButtonDiv);
         vwDiv.appendChild(vwPluginWrapperDiv);
-
         document.body.appendChild(vwDiv);
 
         const script = document.createElement('script');
@@ -40,7 +40,7 @@ export function VLibrasWidget() {
         script.async = true;
         script.onload = () => {
             if (window.VLibras) {
-                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                new window.VLibras('https://vlibras.gov.br/app');
             }
         };
 
