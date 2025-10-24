@@ -3,7 +3,6 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-// Declara a variável global do VLibras para o TypeScript
 declare global {
     interface Window {
         VLibras: any;
@@ -12,32 +11,52 @@ declare global {
 
 export function VLibrasWidget() {
     useEffect(() => {
-        // Este efeito garante que o widget seja inicializado após o script ser carregado
-        const checkVlibras = setInterval(() => {
+        if (document.getElementById('vlibras-widget-script')) {
+            return;
+        }
+
+        const vwDiv = document.createElement('div');
+        vwDiv.setAttribute('vw', ''); 
+        vwDiv.classList.add('enabled');
+        const vwAccessButtonDiv = document.createElement('div');
+        vwAccessButtonDiv.setAttribute('vw-access-button', '');
+        vwAccessButtonDiv.classList.add('active');
+
+        const vwPluginWrapperDiv = document.createElement('div');
+        vwPluginWrapperDiv.setAttribute('vw-plugin-wrapper', '');
+
+        const vwPluginTopWrapperDiv = document.createElement('div');
+        vwPluginTopWrapperDiv.classList.add('vw-plugin-top-wrapper');
+
+        vwPluginWrapperDiv.appendChild(vwPluginTopWrapperDiv);
+        vwDiv.appendChild(vwAccessButtonDiv);
+        vwDiv.appendChild(vwPluginWrapperDiv);
+
+        document.body.appendChild(vwDiv);
+
+        const script = document.createElement('script');
+        script.id = 'vlibras-widget-script';
+        script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+        script.async = true;
+        script.onload = () => {
             if (window.VLibras) {
                 new window.VLibras.Widget('https://vlibras.gov.br/app');
-                clearInterval(checkVlibras);
             }
-        }, 100); // Verifica a cada 100ms
+        };
 
-        return () => clearInterval(checkVlibras);
+        document.body.appendChild(script);
+
+        return () => {
+            const existingVwDiv = document.querySelector('div[vw]');
+            const existingScript = document.getElementById('vlibras-widget-script');
+            if (existingVwDiv) {
+                document.body.removeChild(existingVwDiv);
+            }
+            if (existingScript) {
+                document.body.removeChild(existingScript);
+            }
+        };
     }, []);
 
-    return (
-        <>
-            <div vw="true" className="enabled">
-                <div vw-access-button="true" className="active"></div>
-                <div vw-plugin-wrapper="true">
-                    <div className="vw-plugin-top-wrapper"></div>
-                </div>
-            </div>
-            <Script
-                src="https://vlibras.gov.br/app/vlibras-plugin.js"
-                strategy="afterInteractive"
-                onLoad={() => {
-                    // O script foi carregado, mas a inicialização é feita no useEffect para garantir
-                }}
-            />
-        </>
-    );
+    return null;
 }
