@@ -33,15 +33,15 @@ async function getSiteData(clienteId: string) {
 }
 
 export default async function ModernHomePage() {
-    // CORREÇÃO: Usar 'CLIENT_ID' sem o prefixo 'NEXT_PUBLIC_'
-    const CLIENT_ID = process.env.CLIENT_ID;
+    // CORREÇÃO DEFINITIVA: Usar a variável com o prefixo NEXT_PUBLIC_
+    const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
     if (!CLIENT_ID) {
         return (
             <main className="flex h-screen items-center justify-center">
                 <div className="text-center p-6 bg-destructive/10 border border-destructive rounded-lg">
                     <h1 className="text-2xl font-bold text-destructive">Erro de Configuração</h1>
-                    <p className="text-destructive/80 mt-2">A variável de ambiente &apos;CLIENT_ID&apos; não está configurada no servidor.</p>
+                    <p className="text-destructive/80 mt-2">A variável de ambiente &apos;NEXT_PUBLIC_CLIENT_ID&apos; não está configurada no servidor.</p>
                     <p className="text-destructive/80 mt-1">Por favor, adicione a variável no painel da Vercel e faça o redeploy.</p>
                 </div>
             </main>
