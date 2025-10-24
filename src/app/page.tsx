@@ -1,4 +1,3 @@
-
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -34,6 +33,7 @@ async function getSiteData(clienteId: string) {
 }
 
 export default async function ModernHomePage() {
+    // CORREÇÃO: Usar 'CLIENT_ID' sem o prefixo 'NEXT_PUBLIC_'
     const CLIENT_ID = process.env.CLIENT_ID;
 
     if (!CLIENT_ID) {
@@ -41,7 +41,6 @@ export default async function ModernHomePage() {
             <main className="flex h-screen items-center justify-center">
                 <div className="text-center p-6 bg-destructive/10 border border-destructive rounded-lg">
                     <h1 className="text-2xl font-bold text-destructive">Erro de Configuração</h1>
-                    {/* CORREÇÃO: Usando &apos; no lugar de ' */}
                     <p className="text-destructive/80 mt-2">A variável de ambiente &apos;CLIENT_ID&apos; não está configurada no servidor.</p>
                     <p className="text-destructive/80 mt-1">Por favor, adicione a variável no painel da Vercel e faça o redeploy.</p>
                 </div>
@@ -57,7 +56,6 @@ export default async function ModernHomePage() {
                 <div className="text-center p-6 bg-yellow-400/10 border border-yellow-500 rounded-lg">
                     <h1 className="text-2xl font-bold text-yellow-800 dark:text-yellow-300">Dados não Encontrados</h1>
                     <p className="text-yellow-700 dark:text-yellow-400 mt-2">Verifique se o CLIENT_ID (`{CLIENT_ID}`) está correto e se os dados existem no Firestore.</p>
-                    {/* CORREÇÃO: Usando &apos; no lugar de ' */}
                     <p className="text-yellow-700 dark:text-yellow-400 mt-1">Pode ser necessário rodar o script &apos;npm run seed&apos; no projeto do painel.</p>
                 </div>
             </main>
