@@ -102,7 +102,7 @@ Para rodar os projetos localmente, você precisará de dois terminais.
     # ... (outras chaves do Firebase)
 
     # ID do Cliente (UID do usuário do cliente no seu Firebase Auth)
-    CLIENT_ID="TNwHy3I7FYSo6lWRB9zziwoAUHD3"
+    CLIENT_ID="xxxxx"
 
     # Revalidação
     REVALIDATE_TOKEN="SEU_TOKEN_SECRETO_COMPARTILHADO" # Note a ausência de NEXT_PUBLIC_
