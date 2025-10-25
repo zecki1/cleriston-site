@@ -3,10 +3,19 @@ import { revalidatePath } from 'next/cache';
 
 // Lista de origens permitidas (URLs completas e exatas)
 const allowedOrigins = [
-    'http://localhost:3000', // Para desenvolvimento local do admin
-    process.env.NEXT_PUBLIC_ADMIN_URL, // URL de produção do admin (ex: https://zecki1.com.br)
-    'https://zecki-site.vercel.app' // URL alternativa do admin
-];
+    // 1. Para desenvolvimento local do admin
+    'http://localhost:3000',
+
+    // 2. Para produção (com e sem www)
+    'https://zecki1.com.br',
+    'https://www.zecki1.com.br',
+
+    // 3. URLs alternativas ou legadas, se houver
+    'https://zecki-site.vercel.app',
+
+    // Você pode remover a variável de ambiente daqui, já que agora está explícito
+    // process.env.NEXT_PUBLIC_ADMIN_URL, 
+].filter(Boolean);
 
 const corsHeaders = (origin: string) => {
     const headers = new Headers();
@@ -25,6 +34,7 @@ export async function GET(request: NextRequest) {
 
     // Se a origem não for nula e não for permitida, bloqueamos a requisição
     if (origin && !allowedOrigins.includes(origin)) {
+        console.error(`CORS Blocked: Origin '${origin}' is not in the allowed list.`);
         return new NextResponse(JSON.stringify({ message: 'Origin not allowed' }), {
             status: 403, // Forbidden
             headers: { 'Content-Type': 'application/json' }
@@ -34,7 +44,7 @@ export async function GET(request: NextRequest) {
     const headers = corsHeaders(origin || "");
     const secret = request.nextUrl.searchParams.get('secret');
 
-    // Lembre-se que esta variável deve ser REVALIDATE_TOKEN (sem NEXT_PUBLIC_) na Vercel
+    // A verificação do token continua a mesma, usando a variável privada
     if (secret !== process.env.REVALIDATE_TOKEN) {
         return new NextResponse(JSON.stringify({ message: 'Invalid Token' }), { status: 401, headers });
     }
