@@ -13,6 +13,9 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "vQW2AMmW_PNKbl194KzVXMG0Sc-qm-ETPWolHde-5wQ",
+  },
   title: "Cleriston Ribeiro - Ilustrador e Concept Artist 2D",
   description: "Olá, sou o Cleriston Ribeiro - Ilustrador, amante da arte e bem humorado. Explore meu portfólio de ilustrações, caricaturas e concept art 2D.",
   keywords: "Ilustração, ilustrador, vetor, vetorização, logo, flat, ilustrador cleriston, cleris ilustra, ilustrações, animações, vetores, Editorial, ilustração vetorial, ilustração didatica, caricaturas animadas, caricaturista, concept artist 2d, artista 2d",
