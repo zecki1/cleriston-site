@@ -14,7 +14,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   verification: {
-    google: "vQW2AMmW_PNKbl194KzVXMG0Sc-qm-ETPWolHde-5wQ",
+    google: "6UEZl8VrKMuQ0-hf1Zq14EnFF83SRgl4Mlmtk4_1EiQ",
   },
   title: "Cleriston Ribeiro - Ilustrador e Concept Artist 2D",
   description: "Olá, sou o Cleriston Ribeiro - Ilustrador, amante da arte e bem humorado. Explore meu portfólio de ilustrações, caricaturas e concept art 2D.",
