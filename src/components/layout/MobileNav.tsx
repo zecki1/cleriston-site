@@ -31,7 +31,7 @@ export function MobileNav() {
         <div className="lg:hidden fixed top-4 left-4 z-50 ml-2">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-full bg-background/80 backdrop-blur-sm w-10 h-10">
+                    <Button variant="outline" size="icon" className="rounded-full bg-background/80 backdrop-blur-sm w-10 h-10" aria-label="Abrir menu">
                         <Menu className="h-5 w-5" />
                     </Button>
                 </SheetTrigger>

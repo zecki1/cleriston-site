@@ -74,6 +74,7 @@ export function SideNav() {
                                     <a
                                         href={`#${link.id}`}
                                         className={cn('nav-link flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 group', 'bg-muted/50 hover:bg-primary ')}
+                                        aria-label={link.title[currentLanguage] || link.title.ptBR}
                                     >
                                         <div className="icon-container text-muted-foreground group-hover:text-primary-foreground transition-colors">
                                             {link.icon}

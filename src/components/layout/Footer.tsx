@@ -41,16 +41,16 @@ export function Footer({ social }: { social: SocialData }) {
         <footer id="footer" className="bg-muted py-8 text-center text-muted-foreground">
             <div className="container mx-auto">
                 <div className="flex justify-center gap-4 mb-6">
-                    <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Instagram">
                         <Instagram size={24} />
                     </a>
-                    <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="WhatsApp">
                         <MessageSquare size={24} />
                     </a>
-                    <a href={social.behance} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    <a href={social.behance} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Behance">
                         <FaBehanceSquare size={24} />
                     </a>
-                    <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="LinkedIn">
                         <Linkedin size={24} />
                     </a>
                 </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -54,6 +55,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Toaster />
         </ThemeProvider>
         <VLibrasWidget />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PF1YD90V1H"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-PF1YD90V1H');
+          `}
+        </Script>
       </body>
     </html>
   );

@@ -30,7 +30,7 @@ export function HeroSection({ hero, social }: { hero: HeroData, social: SocialDa
 
   return (
     <section id="hero" className="relative flex h-screen w-full flex-col items-center justify-center text-center text-foreground">
-      <Image src={bgImage} alt="Background" fill className="object-cover z-0" priority />
+      <Image src={bgImage} alt="Background" fill className="object-cover z-0" priority sizes="100vw" />
       <div className="absolute inset-0 bg-background/70 backdrop-blur-sm z-10" />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="container relative z-20">
         <h1 className="text-5xl font-bold tracking-tight md:text-7xl">{hero.title}</h1>
@@ -41,10 +41,10 @@ export function HeroSection({ hero, social }: { hero: HeroData, social: SocialDa
           )}
         </div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }} className="mt-8 flex justify-center gap-4">
-          <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={28} /></a>
-          <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><MessageSquare size={28} /></a>
-          <a href={social.behance} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><FaBehanceSquare size={28} /></a>
-          <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={28} /></a>
+          <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram"><Instagram size={28} /></a>
+          <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="WhatsApp"><MessageSquare size={28} /></a>
+          <a href={social.behance} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Behance"><FaBehanceSquare size={28} /></a>
+          <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn"><Linkedin size={28} /></a>
         </motion.div>
       </motion.div>
     </section>
